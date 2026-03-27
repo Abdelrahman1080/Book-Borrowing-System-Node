@@ -1,0 +1,58 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="book-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4V20M8 8H16M8 12H14M8 16H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M4 6H20V18H4V6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M20 8L12 12L4 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="auth-title">Join Our Community</h2>
+      <p class="auth-subtitle">Start your book sharing journey today</p>
+    </div>
+    
+    <div class="auth-body">
+      <div class="input-group">
+        <label class="input-label">Email Address</label>
+        <input 
+          [(ngModel)]="email" 
+          placeholder="your@email.com" 
+          type="email"
+          class="auth-input"
+          autocomplete="email">
+        <div class="input-focus-effect"></div>
+        <div class="input-validation-icon"></div>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">Password</label>
+        <input 
+          [(ngModel)]="password" 
+          placeholder="Create a strong password" 
+          type="password"
+          class="auth-input"
+          autocomplete="new-password">
+        <div class="input-focus-effect"></div>
+        <div class="password-strength" *ngIf="password">
+        </div>
+      </div>
+      
+      <button (click)="register()" class="auth-button">
+        <span class="button-text">Create Account</span>
+        <span class="button-icon">✨</span>
+      </button>
+      
+      <div *ngIf="message" class="message" [class.message-success]="message === 'Registered successfully'" [class.message-error]="message !== 'Registered successfully'">
+        <span class="message-icon">{{message === 'Registered successfully' ? '✓' : '⚠️'}}</span>
+        <span class="message-text">{{message}}</span>
+      </div>
+    </div>
+    
+    <div class="auth-footer">
+      <p class="footer-text">Already have an account? 
+        <a routerLink="/login" class="auth-link">Sign In</a>
+      </p>
+    </div>
+  </div>
+</div>

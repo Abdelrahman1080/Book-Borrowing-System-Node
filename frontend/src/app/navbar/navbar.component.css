@@ -1,0 +1,386 @@
+/* Modern CSS Variables */
+:host {
+  --primary-color: #4F46E5;
+  --primary-dark: #4338CA;
+  --primary-light: #818CF8;
+  --danger-color: #EF4444;
+  --danger-dark: #DC2626;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --bg-white: #FFFFFF;
+  --bg-light: #F9FAFB;
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Navbar Container */
+.navbar {
+  background: var(--bg-white);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo Styles */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile Menu Button */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: var(--transition);
+  color: var(--text-primary);
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.menu-btn:hover {
+  background: var(--bg-light);
+  transform: scale(1.05);
+}
+
+.menu-icon,
+.close-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition);
+}
+
+.close-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.menu-btn.open .menu-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.menu-btn.open .close-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: var(--transition);
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary-color));
+  transition: var(--transition);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.nav-links a:hover::before {
+  width: 70%;
+}
+
+.nav-links a.active {
+  color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(67, 56, 202, 0.08));
+}
+
+.nav-links a.active::before {
+  width: 70%;
+}
+
+/* Logout Button */
+.logout {
+  background: linear-gradient(135deg, var(--danger-color), var(--danger-dark));
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-left: 0.5rem;
+  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.logout::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.logout:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.logout:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.logout:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.875rem 1.5rem;
+    position: relative;
+  }
+
+  .menu-btn {
+    display: block;
+    z-index: 1001;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-white);
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    padding: 2rem;
+    align-items: stretch;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links a {
+    padding: 0.875rem 1rem;
+    text-align: center;
+    font-size: 1rem;
+    width: 100%;
+    display: block;
+  }
+
+  .nav-links a::before {
+    bottom: 0;
+  }
+
+  .logout {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    padding: 0.875rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Overlay */
+  .nav-links::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: -1;
+  }
+
+  .nav-links.open::before {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav-links a {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .logout {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --bg-white: #1F2937;
+    --bg-light: #374151;
+    --text-primary: #F9FAFB;
+    --text-secondary: #9CA3AF;
+  }
+
+  .navbar {
+    background: var(--bg-white);
+  }
+
+  .nav-links a.active {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(67, 56, 202, 0.15));
+  }
+}
+
+/* Hover Effects for Desktop */
+@media (min-width: 769px) {
+  .nav-links a {
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary-color));
+    transition: var(--transition);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    width: 70%;
+  }
+}
+
+/* Animation for mobile menu items */
+@media (max-width: 768px) {
+  .nav-links.open a,
+  .nav-links.open .logout {
+    animation: slideInFromRight 0.3s ease-out backwards;
+  }
+
+  .nav-links.open a:nth-child(1) { animation-delay: 0.05s; }
+  .nav-links.open a:nth-child(2) { animation-delay: 0.1s; }
+  .nav-links.open a:nth-child(3) { animation-delay: 0.15s; }
+  .nav-links.open .logout { animation-delay: 0.2s; }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* Focus styles for accessibility */
+.nav-links a:focus-visible,
+.logout:focus-visible,
+.menu-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Logo hover effect */
+.logo {
+  position: relative;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary-color));
+  transition: var(--transition);
+}
+
+.logo:hover::after {
+  width: 100%;
+}

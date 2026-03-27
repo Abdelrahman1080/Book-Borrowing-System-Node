@@ -1,0 +1,57 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="book-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M8 8H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 12H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 16H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16 4V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Sign in to continue your reading journey</p>
+    </div>
+    
+    <div class="auth-body">
+      <div class="input-group">
+        <label class="input-label">Email Address</label>
+        <input 
+          [(ngModel)]="email" 
+          placeholder="your@email.com" 
+          type="email"
+          class="auth-input"
+          autocomplete="email">
+        <div class="input-focus-effect"></div>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">Password</label>
+        <input 
+          [(ngModel)]="password" 
+          placeholder="Enter your password" 
+          type="password"
+          class="auth-input"
+          autocomplete="current-password">
+        <div class="input-focus-effect"></div>
+      </div>
+      
+      <button (click)="login()" class="auth-button">
+        <span class="button-text">Sign In</span>
+        <span class="button-icon">→</span>
+      </button>
+      
+      <div *ngIf="message" class="message message-error">
+        <span class="message-icon">⚠️</span>
+        <span class="message-text">{{message}}</span>
+      </div>
+    </div>
+    
+    <div class="auth-footer">
+      <p class="footer-text">Don't have an account? 
+        <a routerLink="/register" class="auth-link">Create Account</a>
+      </p>
+    </div>
+  </div>
+</div>

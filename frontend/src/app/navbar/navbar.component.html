@@ -1,0 +1,41 @@
+
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="logo" routerLink="/my-books">
+    📚 Book System
+  </div>
+
+  <!-- Mobile Toggle -->
+  <button class="menu-btn" (click)="toggleMenu()">
+    <span class="menu-icon">☰</span>
+    <span class="close-icon">✕</span>
+  </button>
+
+  <!-- Links -->
+  <div class="nav-links" [class.open]="isMenuOpen">
+ <a 
+      routerLink="/my-books" 
+      routerLinkActive="active"
+      (click)="isMenuOpen=false">
+      My Books
+    </a>
+
+    <a 
+      routerLink="/borrow-books" 
+      routerLinkActive="active"
+      (click)="isMenuOpen=false">
+      Borrow Books
+    </a>
+
+    <a 
+      routerLink="/my-list" 
+      routerLinkActive="active"
+      (click)="isMenuOpen=false">
+      My List
+t
+    </a>
+
+    <!-- Logout -->
+    <button class="logout" (click)="logout()">Logout</button>
+  </div>
+</nav>

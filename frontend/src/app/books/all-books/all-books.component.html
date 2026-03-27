@@ -1,0 +1,76 @@
+<div class="books-container">
+  <div class="container-header">
+    <h2 class="page-title">
+      <span class="title-icon">📚</span>
+      All Books
+    </h2>
+    <p class="page-subtitle">Discover and borrow books from our community</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Loading books...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <div class="error-icon">⚠️</div>
+    <p class="error-message">{{error}}</p>
+    <button class="retry-button" (click)="loadBooks()">Try Again</button>
+  </div>
+
+  <!-- Books Grid -->
+  <div class="books-grid" *ngIf="!loading && !error">
+    <div *ngFor="let book of books" class="book-card" [class.archived]="isArchived(book)" [class.borrowed]="isBorrowed(book)">
+      
+      <!-- Book Cover Section -->
+      <div class="book-cover">
+        <div class="book-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M8 8H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M8 12H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M8 16H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="book-status-badge" [ngClass]="getStatus(book).toLowerCase()">
+          {{ getStatus(book) }}
+        </div>
+      </div>
+      
+      <!-- Book Info Section -->
+      <div class="book-info">
+        <h3 class="book-title">{{book.title}}</h3>
+        
+        
+        <!-- Borrowed By Info -->
+        <div *ngIf="book.borrowedBy" class="borrowed-info">
+          <span class="borrowed-icon">👤</span>
+          <span class="borrowed-text">Borrowed </span>
+        </div>
+      </div>
+      
+      <!-- Action Button -->
+      <div class="book-actions">
+        <button 
+          (click)="borrowBook(book)"
+          [disabled]="!isAvailable(book)"
+          class="borrow-button"
+          [class.disabled]="!isAvailable(book)">
+          <span class="button-icon">{{ isAvailable(book) ? '📖' : '🔒' }}</span>
+          <span class="button-text">{{ isAvailable(book) ? 'Borrow Book' : 'Not Available' }}</span>
+        </button>
+      </div>
+      
+    </div>
+    
+    <!-- Empty State -->
+    <div *ngIf="books.length === 0" class="empty-state">
+      <div class="empty-icon">📭</div>
+      <h3 class="empty-title">No Books Available</h3>
+      <p class="empty-message">Check back later for new books in our collection</p>
+    </div>
+    
+  </div>
+</div>
