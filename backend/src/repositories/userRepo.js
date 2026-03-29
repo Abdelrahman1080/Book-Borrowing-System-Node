@@ -14,3 +14,4 @@ exports.findByEmail = async (email) => {
   const doc = snap.docs[0];
   return { id: doc.id, ...doc.data() };
 };
+ 

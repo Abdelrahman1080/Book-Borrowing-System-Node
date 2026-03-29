@@ -19,8 +19,10 @@ exports.findByUser = async (userId) => {
   const snap = await db.collection('borrows')
     .where('userId', '==', userId).get();
 
+
   return snap.docs.map(d => ({ id: d.id, ...d.data()  }));
 };
+
 
 exports.update = (id, data) =>
   db.collection('borrows').doc(id).update(data);

@@ -9,6 +9,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+
   register(user: any) {
     return this.http.post(`${this.BASE}/register`, user);
   }

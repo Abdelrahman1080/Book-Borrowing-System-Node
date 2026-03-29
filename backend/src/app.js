@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:4200', // أو '*'
+    origin: '*', 
     methods: ['GET','POST','PATCH','DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

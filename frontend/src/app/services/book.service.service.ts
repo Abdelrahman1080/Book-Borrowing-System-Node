@@ -9,7 +9,7 @@ export class BooksService {
 
   private headers() {
     return new HttpHeaders({ Authorization: `Bearer ${this.auth.getToken()}` });
-  }
+  } 
 
   createBook(title: string) {
     return this.http.post(this.BASE, { title }, { headers: this.headers() });

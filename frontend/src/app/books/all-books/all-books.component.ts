@@ -34,6 +34,7 @@ export class AllBooksComponent implements OnInit {
         this.books = res;
         this.loading = false;
       },
+
       error: () => {
         this.error = 'Failed to load books';
         this.loading = false;
